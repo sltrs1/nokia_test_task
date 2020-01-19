@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <functional>
+#include <vector>
 
 // Структура дерева из задания
 struct TreeNode {
@@ -29,9 +30,20 @@ TreeNodeMod * CreateBalancedTree(int arr[], int start, int end);
 void PrintTreeTraversal(TreeNodeMod * n);
 void PrintTreeByLevel(TreeNodeMod * n);
 
+// // Функция, в которой выполняется задание по поиску максимально длинных путей в дереве
+void tree_longest_paths();
+
+// Измерение высоты дерева
 size_t TreeHeight(TreeNodeMod * node);
 
-void tree_longest_paths();
+// Функция поиска путей
+std::vector<std::vector<int>> FindPaths(TreeNodeMod * node);
+
+// Вспомогательная функция поиска путей
+void FindPathHelper(TreeNodeMod * node, std::vector<std::vector<int>> & paths, std::vector<int> cur_path, size_t path_len_max);
+
+// Печать найденных путей
+void PrintPaths(std::vector<std::vector<int>>  & paths);
 
 
 #endif //NOKIA_TEST_TASK_TREE_LONGEST_PATHS_H

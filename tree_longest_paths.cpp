@@ -27,10 +27,14 @@ void tree_longest_paths() {
 
     TreeNodeMod * head = CreateBalancedTree(arr, 0, n-1);
 
+    std::cout << "Your tree in traversal form: " << std::endl;
     PrintTreeTraversal(head);
     std::cout << std::endl;
+    std::cout << "Your tree by level: " << std::endl;
     PrintTreeByLevel(head);
-
+    std::cout << std::endl;
+    auto res = FindPaths(head);
+    PrintPaths(res);
 
 }
 
@@ -116,4 +120,54 @@ void PrintTreeByLevel(TreeNodeMod * n) {
         std::cout << std::endl;
     }
 
+}
+
+
+std::vector<std::vector<int>> FindPaths(TreeNodeMod * node) {
+
+    std::vector<std::vector<int>> paths;
+    size_t h = TreeHeight(node);
+    std::vector<int> cur_path;
+    cur_path.reserve(h);
+
+    FindPathHelper(node, paths, cur_path, h);
+
+    return paths;
+}
+
+void FindPathHelper(TreeNodeMod * node, std::vector<std::vector<int>> & paths, std::vector<int> cur_path, size_t path_len_max) {
+
+    // Если узел пуст, то ничего не делать
+    if (node == nullptr) {
+        return;
+    }
+
+    // Добавить текущий узел в путь
+    cur_path.push_back(node->data);
+
+    // Если узел - лист, то проверить длину пути и запомнить путь, если он максимальной длины
+    if (node->rightChild == nullptr && node->leftChild == nullptr) {
+
+        if (cur_path.size() == path_len_max) {
+           paths.push_back(cur_path);
+        }
+
+    }
+    else {
+        // Если узел не лист, то рекурсивно обойти левое и правое поддерево
+        FindPathHelper(node->leftChild, paths, cur_path, path_len_max);
+        FindPathHelper(node->rightChild, paths, cur_path, path_len_max);
+
+    }
+
+}
+
+void PrintPaths(std::vector<std::vector<int>>  & paths) {
+    std::cout << "Paths found: " << std::endl;
+    for (const auto & a : paths) {
+        for (const auto & b : a) {
+            std::cout << b << " ";
+        }
+        std::cout << std::endl;
+    }
 }
