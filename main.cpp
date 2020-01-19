@@ -8,7 +8,7 @@
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-/*
+
     size_t menu = 0;
 
     while (menu != 6) {
@@ -65,19 +65,6 @@ int main() {
         };
 
     }
-*/
-    //prime_numbers();
-
-    //words_in_text();
-
-    //list_fifth();
-
-    //bit_operations();
-
-    tree_longest_paths();
-
-
-
 
     return 0;
 }
